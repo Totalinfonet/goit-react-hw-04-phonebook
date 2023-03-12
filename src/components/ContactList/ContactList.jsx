@@ -1,6 +1,6 @@
 import { ContactItem } from '../ContactItem/ContactItem';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul>
       {contacts.map(contact => (
@@ -8,6 +8,7 @@ export const ContactList = ({ contacts }) => {
           key={contact.id}
           name={contact.name}
           number={contact.number}
+          onDelete={() => onDeleteContact(contact.id)}
         />
       ))}
     </ul>
