@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { Filter } from '../Filter/Filter';
 import { ContactList } from '../ContactList/ContactList';
+import { AppWrapper, Title } from './App.styled';
 export class App extends Component {
   static propTypes = {
     contacts: PropTypes.arrayOf(
@@ -60,16 +61,16 @@ export class App extends Component {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <AppWrapper>
+        <Title>Phonebook</Title>
         <ContactForm onSubmit={this.addContact} />
-        <h2>Contacts</h2>
+        <Title>Contacts</Title>
         <Filter filter={filter} onChange={this.handleFilterChange} />
         <ContactList
           contacts={filteredContacts}
           onDeleteContact={this.deleteContact}
         />
-      </div>
+      </AppWrapper>
     );
   }
 }

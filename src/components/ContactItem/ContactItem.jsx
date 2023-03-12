@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Li, DeleteButton } from './ContactItem.styled';
 
 export class ContactItem extends Component {
   static propTypes = {
@@ -16,12 +17,12 @@ export class ContactItem extends Component {
   render() {
     const { name, number } = this.props;
     return (
-      <li>
+      <Li>
         {name}: {number}
-        <button type="button" onClick={this.handleDelete}>
+        <DeleteButton type="button" onClick={this.handleDelete}>
           Delete
-        </button>
-      </li>
+        </DeleteButton>
+      </Li>
     );
   }
 }

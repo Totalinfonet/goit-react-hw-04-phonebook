@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
+import { FilterLabel, FilterInput } from './Filter.styled';
 
 export const Filter = ({ filter, onChange }) => (
-  <label>
+  <FilterLabel>
     Find contacts by name
-    <input
+    <FilterInput
       type="text"
       name="filter"
       placeholder="Search contacts by name"
       value={filter}
       onChange={onChange}
     />
-  </label>
+  </FilterLabel>
 );
 
 Filter.propTypes = {
