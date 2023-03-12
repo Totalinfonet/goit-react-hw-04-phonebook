@@ -20,9 +20,15 @@ export class App extends Component {
       name,
       number,
     };
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+    const { contacts } = this.state;
+    const isNameExists = contacts.some(contact => contact.name === name);
+    if (isNameExists) {
+      alert(`${name} is already in contacts.`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, contact],
+      }));
+    }
   };
 
   handleFilterChange = e => {
