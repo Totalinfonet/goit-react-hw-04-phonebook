@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { Filter } from '../Filter/Filter';
 import { ContactList } from '../ContactList/ContactList';
 export class App extends Component {
+  static propTypes = {
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+    filter: PropTypes.string,
+  };
+
   state = {
-    contacts: [
+    contacts: this.props.contacts || [
       { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
       { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
       { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
       { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: '',
+    filter: this.props.filter || '',
   };
 
   addContact = (name, number) => {
