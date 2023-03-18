@@ -15,6 +15,34 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contactsFromLocalStorage = this.getContactsFromLocalStorage();
+    if (contactsFromLocalStorage) {
+      this.setState({ contacts: contactsFromLocalStorage });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  getContactsFromLocalStorage() {
+    const contacts = localStorage.getItem('contacts');
+    if (!contacts) {
+      const initialContacts = [
+        { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
+        { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
+        { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
+        { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
+      ];
+      localStorage.setItem('contacts', JSON.stringify(initialContacts));
+      return initialContacts;
+    }
+    return JSON.parse(contacts);
+  }
+
   addContact = (name, number) => {
     const contact = {
       id: nanoid(),
@@ -34,9 +62,16 @@ export class App extends Component {
   };
 
   deleteContact = id => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
-    }));
+    this.setState(
+      prevState => ({
+        contacts: prevState.contacts.filter(contact => contact.id !== id),
+      }),
+      () => {
+        if (this.state.contacts.length === 0) {
+          localStorage.clear();
+        }
+      }
+    );
   };
 
   handleFilterChange = e => {
