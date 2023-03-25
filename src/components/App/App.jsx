@@ -24,7 +24,11 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    if (contacts.length === 0) {
+      localStorage.removeItem('contacts');
+    } else {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
   }, [contacts]);
 
   const getContactsFromLocalStorage = () => {
