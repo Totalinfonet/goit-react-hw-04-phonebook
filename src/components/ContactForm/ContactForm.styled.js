@@ -32,8 +32,8 @@ export const Label = styled.label`
 export const Button = styled.button`
   padding: 10px 20px;
   border-radius: 5px;
-  border: 1px solid #2f80ed;
-  background-color: #2f80ed;
+  border: 1px solid green;
+  background-color: green;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -41,6 +41,11 @@ export const Button = styled.button`
 
   &:hover {
     background-color: #fff;
-    color: #2f80ed;
+    color: green;
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 `;
